@@ -108,10 +108,18 @@
 				<artifactId>maven-release-plugin</artifactId>
 				<version>2.5.3</version>
 			</plugin>
+			        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+                  
+        </plugin>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring.boot-version}</version>
+                 <configuration>
+                    <mainClass>xyz.tomd.MySpringBootApplication</mainClass>
+                </configuration> 
 				<executions>
 					<execution>
 						<goals>
