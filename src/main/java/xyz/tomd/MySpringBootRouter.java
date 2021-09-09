@@ -3,17 +3,43 @@ package xyz.tomd;
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Component
 public class MySpringBootRouter extends RouteBuilder {
 
     @Value("${greeting}")
-    private String greetingMessage; 
-	
+    private String greetingMessage;
+
+    @Value("${fileMessage:}")
+    private String fileMessage;
+
     @Override
     public void configure() {
+        StringBuffer messageContents = new StringBuffer();
+        messageContents.append(greetingMessage);
+        messageContents.append("<br/>");
+        if (fileMessage.length() > 0) {
+            File file = new File(fileMessage);
+            if (file.exists()) {
+                try {
+                    List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
+                    for(String line:lines) {
+                        messageContents.append(line);
+                        messageContents.append("<br/>");
+                    }
+                } catch (IOException e) {
+                    e.getMessage();
+                }
+            }
+        }
         from("servlet:/hello")
-                .setBody(constant(greetingMessage));
+                .setBody(constant(messageContents));
     }
 
 }
