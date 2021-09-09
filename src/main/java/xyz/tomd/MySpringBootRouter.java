@@ -23,10 +23,14 @@ public class MySpringBootRouter extends RouteBuilder {
     public void configure() {
         StringBuffer messageContents = new StringBuffer();
         messageContents.append("<html><body>");
+
         messageContents.append(greetingMessage);
         messageContents.append("<br/>");
+
         if (fileMessage.length() > 0) {
+            System.out.println("File Message :"+fileMessage);
             File file = new File(fileMessage);
+            System.out.println("File Message :"+file.exists());
             if (file.exists()) {
                 try {
                     List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
@@ -39,6 +43,7 @@ public class MySpringBootRouter extends RouteBuilder {
                 }
             }
         }
+
         messageContents.append("</body></html>");
         from("servlet:/hello")
                 .setBody(constant(messageContents));
