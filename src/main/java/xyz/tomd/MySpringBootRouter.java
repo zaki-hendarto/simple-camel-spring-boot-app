@@ -16,7 +16,7 @@ public class MySpringBootRouter extends RouteBuilder {
     @Value("${greeting}")
     private String greetingMessage;
 
-    @Value("${fileMessage:}")
+    @Value("${fileMessage}")
     private String fileMessage;
 
     @Override
