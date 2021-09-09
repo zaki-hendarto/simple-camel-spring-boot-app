@@ -31,7 +31,7 @@ public class SimpleGreetingRestController {
             System.out.println("File Message :" + fileMessage + " is exist " + file.exists());
             if (file.exists()) {
                 try {
-                    map.put("message", FileUtils.readFileToString(file, Charset.defaultCharset()));
+                    map.put("message", FileUtils.readFileToString(file, Charset.defaultCharset()).trim());
 
                 } catch (IOException e) {
                     e.getMessage();
