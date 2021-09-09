@@ -22,6 +22,7 @@ public class MySpringBootRouter extends RouteBuilder {
     @Override
     public void configure() {
         StringBuffer messageContents = new StringBuffer();
+        messageContents.append("<html><body>");
         messageContents.append(greetingMessage);
         messageContents.append("<br/>");
         if (fileMessage.length() > 0) {
@@ -38,6 +39,7 @@ public class MySpringBootRouter extends RouteBuilder {
                 }
             }
         }
+        messageContents.append("</body></html>");
         from("servlet:/hello")
                 .setBody(constant(messageContents));
     }
