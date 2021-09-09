@@ -28,9 +28,8 @@ public class MySpringBootRouter extends RouteBuilder {
         messageContents.append("<br/>");
 
         if (fileMessage.length() > 0) {
-            System.out.println("File Message :"+fileMessage);
             File file = new File(fileMessage);
-            System.out.println("File Message :"+file.exists());
+            System.out.println("File Message :"+fileMessage+" is exist "+file.exists());
             if (file.exists()) {
                 try {
                     List<String> lines = FileUtils.readLines(file, StandardCharsets.UTF_8);
